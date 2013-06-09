@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_opengl.h>
 
 #define G_NAME "Virus"
 #define G_VERSION "0.0"
