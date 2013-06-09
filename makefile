@@ -7,12 +7,12 @@ SDLFLAGS=-lSDLmain -lSDL -lSDL_image
 SOURCEDIR=.
 BINDIR=../bin
 
-CSOURCE=main.c
+CSOURCE=pweke.c
 INDIR_CSOURCE=$(addprefix $(SOURCEDIR)/,$(CSOURCE))
-CHEADER=main.h
+CHEADER=pweke.h
 INDIR_CHEADER=$(addprefix $(SOURCEDIR)/,$(CHEADER))
-BIN=virus
-EXE=virus.exe
+BIN=pweke
+EXE=pweke.exe
 
 all: $(BINDIR)/$(BIN)
 
