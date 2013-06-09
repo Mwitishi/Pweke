@@ -1,0 +1,28 @@
+CC=gcc
+WIN_CC=i586-mingw32msvc-gcc
+CFLAGS=-Wall
+WINFLAGS=-Wall -lmingw32
+SDLFLAGS=-lSDLmain -lSDL -lSDL_image
+
+SOURCEDIR=.
+BINDIR=../bin
+
+CSOURCE=main.c
+INDIR_CSOURCE=$(addprefix $(SOURCEDIR)/,$(CSOURCE))
+CHEADER=main.h
+INDIR_CHEADER=$(addprefix $(SOURCEDIR)/,$(CHEADER))
+BIN=virus
+EXE=virus.exe
+
+all: $(BINDIR)/$(BIN)
+
+win: $(BINDIR)/$(EXE)
+
+clean:
+	rm -f $(BINDIR)/$(BIN) $(BINDIR)/$(EXE)
+
+$(BINDIR)/$(BIN): $(INDIR_CSOURCE) $(INDIR_CHEADER)
+	$(CC) $(CFLAGS) $(INDIR_CSOURCE) -o $(BINDIR)/$(BIN) $(SDLFLAGS)
+
+$(BINDIR)/$(EXE): $(INDIR_CSOURCE) $(INDIR_CHEADER)
+	$(WIN_CC) $(WINFLAGS) $(INDIR_CSOURCE) -o $(BINDIR)/$(EXE) $(SDLFLAGS)
