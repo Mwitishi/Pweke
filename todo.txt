@@ -1,0 +1,15 @@
+List of features to be added to Pweke:
+
+- Displaying the map
+
+- Setting walkable/nonwalkable tiles
+
+- Displaying the player
+
+- Controlling the player
+
+- Item system
+
+- Zombies
+
+- Buildings

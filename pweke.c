@@ -1,3 +1,7 @@
+//Avoid double declaring global variables
+#define NO_EXTERN
+
+//Include game header
 #include "pweke.h"
 
 //Pointer to the screen struct
