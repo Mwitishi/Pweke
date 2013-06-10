@@ -17,6 +17,23 @@ int pw_start() {
     //Create screen
     screen = SDL_SetVideoMode(640, 480, 16, SDL_OPENGL);
 
+    //OpenGL initialization
+    glEnable( GL_TEXTURE_2D );
+
+    glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
+
+    glViewport( 0, 0, 640, 480 );
+
+    glClear( GL_COLOR_BUFFER_BIT );
+
+    glMatrixMode( GL_PROJECTION );
+    glLoadIdentity();
+
+    glOrtho(0.0f, 640, 480, 0.0f, -1.0f, 1.0f);
+
+    glMatrixMode( GL_MODELVIEW );
+    glLoadIdentity();
+
     return 0;
 }
 
