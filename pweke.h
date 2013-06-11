@@ -5,20 +5,24 @@
 #include <SDL/SDL_opengl.h>
 
 //Game name and version
-#define G_NAME "Pweke"
-#define G_VERSION "0.0"
+#define PW_NAME "Pweke"
+#define PW_VERSION "0.0"
+
+//Number constants
+#define PW_SCREEN_W 640
+#define PW_SCREEN_H 480
 
 //Folder names
-#define G_IMG_FOLD "imgs/"
-#define G_DATA_FOLD "data/"
+#define PW_IMG_FOLD "imgs/"
+#define PW_DATA_FOLD "data/"
 
 //Data files
-#define G_TILE_DATA "tiles.dat"
-#define G_WALK_DATA "walk.dat"
+#define PW_TILE_DATA "tiles.dat"
+#define PW_WALK_DATA "walk.dat"
 
 //Image files
-#define G_TILE_IMG "tiles.png"
-#define G_PLAYER_IMG "player.png"
+#define PW_TILE_IMG "tiles.png"
+#define PW_PLAYER_IMG "player.png"
 
 //Declare extern variables
 #ifndef NO_EXTERN

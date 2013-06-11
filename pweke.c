@@ -7,6 +7,11 @@
 //Pointer to the screen struct
 SDL_Surface *screen = NULL;
 
+//Handlers to OpenGL textures
+GLuint player;
+
+float angle = 0;
+
 //Function for initializing the game
 int pw_start() {
     //SDL initialization
@@ -19,21 +24,21 @@ int pw_start() {
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
     //Create screen
-    screen = SDL_SetVideoMode(640, 480, 16, SDL_OPENGL);
+    screen = SDL_SetVideoMode(PW_SCREEN_W, PW_SCREEN_H, 16, SDL_OPENGL);
 
     //OpenGL initialization
     glEnable( GL_TEXTURE_2D );
 
-    glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
+    glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
 
-    glViewport( 0, 0, 640, 480 );
+    glViewport( 0, 0, PW_SCREEN_W, PW_SCREEN_H);
 
     glClear( GL_COLOR_BUFFER_BIT );
 
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
 
-    glOrtho(0.0f, 640, 480, 0.0f, -1.0f, 1.0f);
+    glOrtho(0.0f, PW_SCREEN_W, PW_SCREEN_H, 0.0f, -1.0f, 1.0f);
 
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
@@ -55,6 +60,32 @@ int pw_event() {
     return 0;
 }
 
+//Function for rendering the scene
+int pw_draw() {
+    //Set matrix and initialize
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glTranslatef(PW_SCREEN_W / 2.f, PW_SCREEN_H / 2.f, 0.f);
+    glRotatef(angle, 0.f, 0.f, 1.f);
+
+    glBegin(GL_QUADS);
+        glColor3f(1.f, 1.f, 1.f);
+        glVertex2f(-64.f, 32.f);
+        glColor3f(1.f, 0.f, 0.f);
+        glVertex2f(64.f, 32.f);
+        glVertex2f(64.f, -32.f);
+        glColor3f(1.f, 1.f, 1.f);
+        glVertex2f(-64.f, -32.f);
+    glEnd();
+
+    SDL_GL_SwapBuffers();
+
+    return 0;
+}
+
 //Function for cleaning up before exit
 int pw_exit() {
     //Free the screen
@@ -69,7 +100,7 @@ int pw_exit() {
 
 int main(int argc, char **argv) {
     //Write game name and version
-    printf("%s %s\n", G_NAME, G_VERSION);
+    printf("%s %s\n", PW_NAME, PW_VERSION);
 
     //Initialization tasks
     if(pw_start()) return 1;
@@ -77,7 +108,11 @@ int main(int argc, char **argv) {
     //Main loop
     while(1) {
         //Event processing
-        if(pw_event()) break;
+        if(pw_event()) goto end;
+
+        angle += 1.f;
+
+        pw_draw();
     }
 
 end:
