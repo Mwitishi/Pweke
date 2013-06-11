@@ -75,13 +75,16 @@ struct pwent {
 struct pwent pwent_make(float, float, GLuint);
 
 //Declare functions in pwaux.c
+float pw_sqrt(float);
 struct vector vector_make(float, float);
-struct vector vector_a(struct vector, struct vector);
-struct vector vector_c(struct vector, float);
-float vector_s(struct vector, struct vector);
-float vector_mod(struct vector);
-struct vector vector_project(struct vector, struct vector);
+#define VECTOR_A(v1, v2) vector_make(v1.x + v2.x, v1.y + v2.y)
+#define VECTOR_C(v1, f1) vector_make(v1.x * f1, v1.y * f1)
+#define VECTOR_S(v1, v2) (v1.x * v2.x + v1.y * v2.y)
+#define VECTOR_MOD(v1) pw_sqrt(v1.x * v1.x + v1.y * v1.y)
+#define VECTOR_PROJECT VECTOR_C(v2, VECTOR_S(v1, v2) / VECTOR_S(v2, v2))
 #define NVECTOR(v1) vector_make(-v1.y, v1.x)
+struct poly poly_make(int, struct vector*);
+char poly_collide(struct poly, struct poly);
 
 //Declare functions in pwfiles.c
 int pw_load_map(char*);
