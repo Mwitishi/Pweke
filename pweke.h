@@ -16,7 +16,7 @@
 //Number constants
 #define PW_SCREEN_W 640
 #define PW_SCREEN_H 480
-#define PW_TILE_SIZE 32
+#define PW_TILE_SIZE 64
 
 //Folder names
 #define PW_IMG_FOLD "imgs/"
@@ -38,6 +38,12 @@ extern SDL_Surface *screen;
 
 #endif
 
+//Struct for holding vector data
+struct vector {
+    float x;
+    float y;
+};
+
 //Struct for containing entity data
 struct pwent {
     //Entity position
@@ -47,9 +53,16 @@ struct pwent {
     float vx;
     float vy;
     //Entity texture
-    GLuint texture;
+    GLuint tex;
 };
 
 //Declare functions in pwent.c
+struct pwent pwent_make(float, float, GLuint);
+
+//Declare functions in pwaux.c
+struct vector vector_make(float, float);
+struct vector vector_a(struct vector, struct vector);
+struct vector vector_c(struct vector, float);
+float vector_s(struct vector, struct vector);
 
 #endif

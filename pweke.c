@@ -17,7 +17,7 @@ int mapx = 0, mapy = 0;
 char **map;
 
 //Scroll data
-float sx = 5, sy = 13;
+float sx = 0, sy = 0;
 
 float angle = 0;
 
@@ -34,6 +34,7 @@ int pw_start() {
 
     //Create screen
     screen = SDL_SetVideoMode(PW_SCREEN_W, PW_SCREEN_H, 16, SDL_OPENGL);
+    SDL_WM_SetCaption(PW_NAME,NULL);
 
     //OpenGL initialization
     glEnable( GL_TEXTURE_2D );
