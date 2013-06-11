@@ -54,6 +54,13 @@ struct vector {
     float y;
 };
 
+//Struct for holding polygons
+//Each vector represents one point
+struct poly {
+    int n;
+    struct vector *v;
+};
+
 //Struct for containing entity data
 struct pwent {
     //Entity position
