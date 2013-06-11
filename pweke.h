@@ -2,7 +2,9 @@
 #define PWEKE_H
 
 //Basic library includes
+#include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_opengl.h>
@@ -14,6 +16,7 @@
 //Number constants
 #define PW_SCREEN_W 640
 #define PW_SCREEN_H 480
+#define PW_TILE_SIZE 32
 
 //Folder names
 #define PW_IMG_FOLD "imgs/"
