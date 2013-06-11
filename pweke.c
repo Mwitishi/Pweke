@@ -8,9 +8,7 @@
 SDL_Surface *screen = NULL;
 
 //Handlers to OpenGL textures
-GLuint player_tex;
-int tile_quan = 0;
-GLuint tile_tex;
+GLuint player_tex, tile_tex;
 
 //Loaded map data
 int mapx = 0, mapy = 0;
@@ -18,6 +16,9 @@ char **map;
 
 //Scroll data
 float sx = 0, sy = 0;
+
+//Game tick count
+uint32_t tick;
 
 float angle = 0;
 

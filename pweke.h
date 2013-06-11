@@ -37,6 +37,12 @@
 #define NO_EXTERN
 
 extern SDL_Surface *screen;
+extern GLuint player_tex, tile_tex;
+extern int mapx, mapy;
+extern char **map;
+extern float sx, sy;
+extern uint32_t tick;
+extern float angle;
 
 #endif
 
@@ -49,11 +55,9 @@ struct vector {
 //Struct for containing entity data
 struct pwent {
     //Entity position
-    float x;
-    float y;
+    struct vector pos;
     //Entity speed
-    float vx;
-    float vy;
+    struct vector vel;
     //Entity texture
     GLuint tex;
 };
@@ -67,5 +71,6 @@ struct vector vector_a(struct vector, struct vector);
 struct vector vector_c(struct vector, float);
 float vector_s(struct vector, struct vector);
 float vector_mod(struct vector);
+#define NVECTOR(v1) vector_make(-v1.y, v1.x)
 
 #endif
