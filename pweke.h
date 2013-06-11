@@ -4,6 +4,7 @@
 //Basic library includes
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_opengl.h>
@@ -16,6 +17,7 @@
 #define PW_SCREEN_W 640
 #define PW_SCREEN_H 480
 #define PW_TILE_SIZE 64
+#define PW_TILE_QUAN 0
 
 //Auxiliary constants
 #define PW_SQRT_ERR 0.001f
@@ -71,6 +73,7 @@ struct vector vector_a(struct vector, struct vector);
 struct vector vector_c(struct vector, float);
 float vector_s(struct vector, struct vector);
 float vector_mod(struct vector);
+struct vector vector_project(struct vector, struct vector);
 #define NVECTOR(v1) vector_make(-v1.y, v1.x)
 
 #endif

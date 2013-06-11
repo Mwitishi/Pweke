@@ -134,6 +134,11 @@ int pw_draw() {
 
 //Function for cleaning up before exit
 int pw_exit() {
+    if(map != NULL) {
+        free(map);
+        map = NULL;
+    }
+
     //Free the screen
     SDL_FreeSurface(screen);
     screen = NULL;

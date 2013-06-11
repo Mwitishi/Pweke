@@ -9,7 +9,7 @@ WINGLFLAGS=-lopengl32 -lglu32
 SOURCEDIR=.
 BINDIR=../bin
 
-CSOURCE=pweke.c pwent.c pwaux.c
+CSOURCE=pweke.c pwent.c pwaux.c pwfiles.c
 INDIR_CSOURCE=$(addprefix $(SOURCEDIR)/,$(CSOURCE))
 CHEADER=pweke.h
 INDIR_CHEADER=$(addprefix $(SOURCEDIR)/,$(CHEADER))

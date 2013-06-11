@@ -40,3 +40,7 @@ float vector_s(struct vector v1, struct vector v2) {
 float vector_mod(struct vector v1) {
     return pw_sqrt(v1.x * v1.x + v1.y * v1.y);
 }
+
+struct vector vector_project(struct vector v1, struct vector v2) {
+    return vector_c(v2, vector_s(v1, v2) / (vector_mod(v2) * vector_mod(v2)));
+}
