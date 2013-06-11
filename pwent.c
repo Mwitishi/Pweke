@@ -1,5 +1,6 @@
 #include "pweke.h"
 
+//Create an entity given entity data
 struct pwent pwent_make(float x, float y, GLuint tex) {
     struct pwent res;
 

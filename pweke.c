@@ -86,11 +86,15 @@ int pw_draw() {
     i2 = (float)PW_TILE_SIZE * (int)(sy / PW_TILE_SIZE);
     for (i3 = i1 ; i3 * PW_TILE_SIZE < sx + PW_SCREEN_W ; i3++) {
         for(i4 = i2 ; i4 * PW_TILE_SIZE < sy + PW_SCREEN_H ; i4++) {
+            //Translate to specified position
             glLoadIdentity();
             glTranslatef(i3 * PW_TILE_SIZE - sx, i4 * PW_TILE_SIZE - sy, 0.f);
+
+            //Set color (for sample tilemap)
             if((i3 + i4) % 2 == 0) glColor3f(1.f, 0.f, 1.f);
             else glColor3f(0.f, 1.f, 0.f);
 
+            //Render quad
             glBegin(GL_QUADS);
                 glVertex2f(0.f, 0.f);
                 glVertex2f(0.f, (float)PW_TILE_SIZE);
@@ -101,11 +105,12 @@ int pw_draw() {
     }
 
 
-    //Render rotating rectangle (sample)
+    //Translate to center of screen and rotate
     glLoadIdentity();
     glTranslatef(PW_SCREEN_W / 2.f, PW_SCREEN_H / 2.f, 0.f);
     glRotatef(angle, 0.f, 0.f, 1.f);
 
+    //Render the rectangle
     glBegin(GL_QUADS);
         glColor3f(1.f, 1.f, 1.f);
         glVertex2f(-64.f, 32.f);
@@ -127,6 +132,7 @@ int pw_draw() {
         glVertex2f(-32.f, -32.f);
     glEnd();
 
+    //Switch buffers, update screen
     SDL_GL_SwapBuffers();
 
     return 0;
@@ -134,6 +140,7 @@ int pw_draw() {
 
 //Function for cleaning up before exit
 int pw_exit() {
+    //Free the map array
     if(map != NULL) {
         free(map);
         map = NULL;
@@ -161,8 +168,10 @@ int main(int argc, char **argv) {
         //Event processing
         if(pw_event()) goto end;
 
+        //Rotate rectangle
         angle += 1.f;
 
+        //Render the scene
         pw_draw();
     }
 

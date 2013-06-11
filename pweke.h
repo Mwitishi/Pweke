@@ -76,4 +76,7 @@ float vector_mod(struct vector);
 struct vector vector_project(struct vector, struct vector);
 #define NVECTOR(v1) vector_make(-v1.y, v1.x)
 
+//Declare functions in pwfiles.c
+int pw_load_map(char*);
+
 #endif
