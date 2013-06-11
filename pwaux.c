@@ -1,5 +1,13 @@
 #include "pweke.h"
 
+float pw_sqrt(float f1) {
+    float res = f1;
+
+    while(res * res - f1 > PW_SQRT_ERR) res = (res + f1 / res) / 2;
+
+    return res;
+}
+
 struct vector vector_make(float x, float y) {
     struct vector res;
 
@@ -27,4 +35,8 @@ struct vector vector_c(struct vector v1, float f1) {
 
 float vector_s(struct vector v1, struct vector v2) {
     return (v1.x * v2.x + v1.y * v2.y);
+}
+
+float vector_mod(struct vector v1) {
+    return pw_sqrt(v1.x * v1.x + v1.y * v1.y);
 }
