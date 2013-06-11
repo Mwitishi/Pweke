@@ -1,3 +1,6 @@
+#ifndef PWEKE_H
+#define PWEKE_H
+
 //Basic library includes
 #include <stdio.h>
 #include <SDL/SDL.h>
@@ -26,8 +29,24 @@
 
 //Declare extern variables
 #ifndef NO_EXTERN
+#define NO_EXTERN
 
 extern SDL_Surface *screen;
 
-#define NO_EXTERN
+#endif
+
+//Struct for containing entity data
+struct pwent {
+    //Entity position
+    float x;
+    float y;
+    //Entity speed
+    float vx;
+    float vy;
+    //Entity texture
+    GLuint texture;
+};
+
+//Declare functions in pwent.c
+
 #endif

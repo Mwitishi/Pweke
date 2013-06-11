@@ -10,6 +10,10 @@ SDL_Surface *screen = NULL;
 //Handlers to OpenGL textures
 GLuint player;
 
+//Loaded map data
+int mapx = 0, mapy = 0;
+char **map;
+
 float angle = 0;
 
 //Function for initializing the game
@@ -79,6 +83,16 @@ int pw_draw() {
         glVertex2f(64.f, -32.f);
         glColor3f(1.f, 1.f, 1.f);
         glVertex2f(-64.f, -32.f);
+    glEnd();
+
+    glLoadIdentity();
+    glTranslatef(PW_SCREEN_W + 20.f, PW_SCREEN_H / 2.f, 0.f);
+
+    glBegin(GL_QUADS);
+        glVertex2f(-32.f, 32.f);
+        glVertex2f(32.f, 32.f);
+        glVertex2f(32.f, -32.f);
+        glVertex2f(-32.f, -32.f);
     glEnd();
 
     SDL_GL_SwapBuffers();
