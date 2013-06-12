@@ -37,20 +37,24 @@ int pw_start() {
     screen = SDL_SetVideoMode(PW_SCREEN_W, PW_SCREEN_H, 16, SDL_OPENGL);
     SDL_WM_SetCaption(PW_NAME,NULL);
 
-    //OpenGL initialization
+    //OpenGL initialization: 2D textures
     glEnable( GL_TEXTURE_2D );
 
+    //Background color: black
     glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
 
+    //Viewport (drawing area) = all screen
     glViewport( 0, 0, PW_SCREEN_W, PW_SCREEN_H);
 
+    //Clear screen
     glClear( GL_COLOR_BUFFER_BIT );
 
+    //Set projection data
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
-
     glOrtho(0.0f, PW_SCREEN_W, PW_SCREEN_H, 0.0f, -1.0f, 1.0f);
 
+    //Reset matrix
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
 
@@ -79,11 +83,14 @@ int pw_draw() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
+    //Clear screen
     glClear(GL_COLOR_BUFFER_BIT);
 
     //Render the tilemap
+    //Get the minimum coordinates for tiles on screen
     i1 = (float)PW_TILE_SIZE * (int)(sx / PW_TILE_SIZE);
     i2 = (float)PW_TILE_SIZE * (int)(sy / PW_TILE_SIZE);
+    //Loop through all tiles to be rendered
     for (i3 = i1 ; i3 * PW_TILE_SIZE < sx + PW_SCREEN_W ; i3++) {
         for(i4 = i2 ; i4 * PW_TILE_SIZE < sy + PW_SCREEN_H ; i4++) {
             //Translate to specified position
@@ -103,34 +110,6 @@ int pw_draw() {
             glEnd();
         }
     }
-
-
-    //Translate to center of screen and rotate
-    glLoadIdentity();
-    glTranslatef(PW_SCREEN_W / 2.f, PW_SCREEN_H / 2.f, 0.f);
-    glRotatef(angle, 0.f, 0.f, 1.f);
-
-    //Render the rectangle
-    glBegin(GL_QUADS);
-        glColor3f(1.f, 1.f, 1.f);
-        glVertex2f(-64.f, 32.f);
-        glColor3f(1.f, 0.f, 0.f);
-        glVertex2f(64.f, 32.f);
-        glVertex2f(64.f, -32.f);
-        glColor3f(1.f, 1.f, 1.f);
-        glVertex2f(-64.f, -32.f);
-    glEnd();
-
-    //Render rectangle outside screen (sample)
-    glLoadIdentity();
-    glTranslatef(PW_SCREEN_W + 20.f, PW_SCREEN_H / 2.f, 0.f);
-
-    glBegin(GL_QUADS);
-        glVertex2f(-32.f, 32.f);
-        glVertex2f(32.f, 32.f);
-        glVertex2f(32.f, -32.f);
-        glVertex2f(-32.f, -32.f);
-    glEnd();
 
     //Switch buffers, update screen
     SDL_GL_SwapBuffers();

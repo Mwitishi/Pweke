@@ -13,15 +13,19 @@ struct pwent pwent_make(float x, float y, GLuint tex) {
     return res;
 }
 
+//Get the bounding rectangle of an entity (for collisions)
 struct poly pwent_box(struct pwent pe1) {
     struct poly res;
     struct vector v1;
 
-    //Create bounding polygon
+    //Initialize structure (4 sides, rectangle)
     res.n = 4;
     res.v = malloc(sizeof(struct vector) * 4);
+    //For each edge, calculate relative position and rotate
     v1 = VECTOR_ROTATE(vector_make(-pe1.size.x / 2, -pe1.size.y / 2), pe1.angle);
+    //Then calculate absolute position
     res.v[0] = VECTOR_A(pe1.pos, v1);
+    //Repeat for other edges
     v1 = VECTOR_ROTATE(vector_make(-pe1.size.x / 2, pe1.size.y / 2), pe1.angle);
     res.v[1] = VECTOR_A(pe1.pos, v1);
     v1 = VECTOR_ROTATE(vector_make(pe1.size.x / 2, pe1.size.y / 2), pe1.angle);

@@ -79,15 +79,22 @@ struct pwent {
 struct pwent pwent_make(float, float, GLuint);
 int pwent_draw(struct pwent);
 
-//Declare functions in pwaux.c
+//Declare functions and macros in pwaux.c
 float pw_sqrt(float);
 struct vector vector_make(float, float);
+//Add two vectors
 #define VECTOR_A(v1, v2) vector_make(v1.x + v2.x, v1.y + v2.y)
+//Product of a vector and a constant
 #define VECTOR_C(v1, f1) vector_make(v1.x * f1, v1.y * f1)
+//Scalar product of two vectors
 #define VECTOR_S(v1, v2) (v1.x * v2.x + v1.y * v2.y)
+//Module of a vector
 #define VECTOR_MOD(v1) sqrt(v1.x * v1.x + v1.y * v1.y)
+//Projection of one vector over another
 #define VECTOR_PROJECT VECTOR_C(v2, VECTOR_S(v1, v2) / VECTOR_S(v2, v2))
+//Rotate a vector by angle f1 (clockwise)
 #define VECTOR_ROTATE(v1, f1) VECTOR_A(VECTOR_C(v1, (float)cos((double)f1)), VECTOR_C(NVECTOR(v1), (float)sin((double)f1)));
+//Get normal vector to v1
 #define NVECTOR(v1) vector_make(-v1.y, v1.x)
 struct poly poly_make(int, struct vector*);
 char poly_collide(struct poly, struct poly);
