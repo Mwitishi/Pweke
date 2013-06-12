@@ -1,15 +1,5 @@
 #include "pweke.h"
 
-//Function for calculating square root of a number
-//Uses simple algorithm s = (s + x/s)/2
-float pw_sqrt(float f1) {
-    float res = f1;
-
-    while(res * res - f1 > PW_SQRT_ERR) res = (res + f1 / res) / 2;
-
-    return res;
-}
-
 //Function for creating a vector out of coordinates
 struct vector vector_make(float x, float y) {
     struct vector res;
