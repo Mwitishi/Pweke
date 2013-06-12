@@ -10,9 +10,15 @@ SDL_Surface *screen = NULL;
 //Handlers to OpenGL textures
 GLuint player_tex, tile_tex;
 
+//Texture data
+char *tile_walk = PW_TILE_WALK;
+
 //Loaded map data
 int mapx = 0, mapy = 0;
 char **map;
+
+//Entities
+struct pwent *player;
 
 //Scroll data
 float sx = 0, sy = 0;

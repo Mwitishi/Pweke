@@ -1,7 +1,7 @@
 #include "pweke.h"
 
 //Create an entity given entity data
-struct pwent pwent_make(float x, float y, GLuint tex) {
+struct pwent pwent_make(float x, float y, GLuint tex, float w, float h, float angle) {
     struct pwent res;
 
     res.pos.x = x;
@@ -9,6 +9,9 @@ struct pwent pwent_make(float x, float y, GLuint tex) {
     res.vel.x = 0;
     res.vel.y = 0;
     res.tex = tex;
+    res.size.x = w;
+    res.size.y = h;
+    res.angle = angle;
 
     return res;
 }
@@ -34,4 +37,19 @@ struct poly pwent_box(struct pwent pe1) {
     res.v[3] = VECTOR_A(pe1.pos, v1);
 
     return res;
+}
+
+int pwent_draw(struct pwent pe1) {
+    glLoadIdentity();
+    glTranslatef(pe1.pos.x, pe1.pos.y, 0.f);
+    glRotatef(pe1.angle, 0.f, 0.f, 1.f);
+
+    glBegin(GL_QUADS);
+        glVertex2f(-pe1.size.x / 2, -pe1.size.y / 2);
+        glVertex2f(-pe1.size.x / 2, pe1.size.y / 2);
+        glVertex2f(pe1.size.x / 2, pe1.size.y / 2);
+        glVertex2f(pe1.size.x / 2, -pe1.size.y / 2);
+    glEnd();
+
+    return 0;
 }
