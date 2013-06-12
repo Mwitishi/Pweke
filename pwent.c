@@ -22,15 +22,15 @@ struct poly pwent_box(struct pwent pe1) {
     res.n = 4;
     res.v = malloc(sizeof(struct vector) * 4);
     //For each edge, calculate relative position and rotate
-    v1 = VECTOR_ROTATE(vector_make(-pe1.size.x / 2, -pe1.size.y / 2), pe1.angle);
+    v1 = VECTOR_ROTATE(vector_make(-pe1.size.x / 2, -pe1.size.y / 2), pe1.angle * M_PI / 180);
     //Then calculate absolute position
     res.v[0] = VECTOR_A(pe1.pos, v1);
     //Repeat for other edges
-    v1 = VECTOR_ROTATE(vector_make(-pe1.size.x / 2, pe1.size.y / 2), pe1.angle);
+    v1 = VECTOR_ROTATE(vector_make(-pe1.size.x / 2, pe1.size.y / 2), pe1.angle * M_PI / 180);
     res.v[1] = VECTOR_A(pe1.pos, v1);
-    v1 = VECTOR_ROTATE(vector_make(pe1.size.x / 2, pe1.size.y / 2), pe1.angle);
+    v1 = VECTOR_ROTATE(vector_make(pe1.size.x / 2, pe1.size.y / 2), pe1.angle * M_PI / 180);
     res.v[2] = VECTOR_A(pe1.pos, v1);
-    v1 = VECTOR_ROTATE(vector_make(pe1.size.x / 2, -pe1.size.y / 2), pe1.angle);
+    v1 = VECTOR_ROTATE(vector_make(pe1.size.x / 2, -pe1.size.y / 2), pe1.angle * M_PI / 180);
     res.v[3] = VECTOR_A(pe1.pos, v1);
 
     return res;

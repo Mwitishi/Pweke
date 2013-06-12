@@ -20,8 +20,6 @@ float sx = 0, sy = 0;
 //Game tick count
 uint32_t tick;
 
-float angle = 0;
-
 //Function for initializing the game
 int pw_start() {
     //SDL initialization
@@ -71,6 +69,13 @@ int pw_event() {
         //If the user closes the game
         if(e1.type == SDL_QUIT) return 1;
     }
+
+    return 0;
+}
+
+//Function for updating positions and checking collisions
+int pw_update() {
+    
 
     return 0;
 }
@@ -146,9 +151,6 @@ int main(int argc, char **argv) {
     while(1) {
         //Event processing
         if(pw_event()) goto end;
-
-        //Rotate rectangle
-        angle += 1.f;
 
         //Render the scene
         pw_draw();
