@@ -20,14 +20,14 @@ SDL_Surface *screen = NULL;
 GLuint player_tex, tile_tex;
 
 //Texture data
-char *tile_walk = PW_TILE_WALK;
+char tile_walk[PW_TILE_QUAN] = PW_TILE_WALK;
 
 //Loaded map data
 int mapx = 0, mapy = 0;
 char **map;
 
 //Entities
-struct pwent *player;
+struct pwent *player = NULL;
 
 //Scroll data
 float sx = 0, sy = 0;
@@ -37,6 +37,9 @@ uint32_t tick;
 
 //Function for initializing the game
 int pw_start() {
+    char *str1 = NULL;
+    SDL_Surface *img1 = NULL;
+
     //SDL initialization
     if(SDL_Init(SDL_INIT_EVERYTHING)) {
         printf("Error while starting SDL.\n");
@@ -75,6 +78,22 @@ int pw_start() {
     glGenTextures(1, &tile_tex);
     glGenTextures(1, &player_tex);
 
+    //Load image into SDL surface
+    str1 = (char*) malloc(strlen(PW_IMG_FOLD) + strlen(PW_TILE_IMG) + 1);
+    sprintf(str1, "%s%s", PW_IMG_FOLD, PW_TILE_IMG);
+    img1 = IMG_Load(str1);
+
+    glBindTexture(GL_TEXTURE_2D, tile_tex);
+    // Set the texture's stretching properties
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+    glTexImage2D(GL_TEXTURE_2D, 0, 3, img1->w, img1->h, 0, GL_RGB, GL_UNSIGNED_BYTE, img1->pixels );
+
+    SDL_FreeSurface(img1);
+    img1 = NULL;
+    free(str1);
+    str1 = NULL;
+
     //Load map
 
     return 0;
@@ -96,7 +115,10 @@ int pw_event() {
 
 //Function for updating positions and checking collisions
 int pw_update() {
-    
+    if(player != NULL) {
+        player->pos.x += player->vel.x;
+        player->pos.y += player->vel.y;
+    }
 
     return 0;
 }
@@ -123,19 +145,24 @@ int pw_draw() {
             glLoadIdentity();
             glTranslatef(i3 * PW_TILE_SIZE - sx, i4 * PW_TILE_SIZE - sy, 0.f);
 
-            //Set color (for sample tilemap)
-            if((i3 + i4) % 2 == 0) glColor3f(1.f, 0.f, 1.f);
-            else glColor3f(0.f, 1.f, 0.f);
+            glBindTexture(GL_TEXTURE_2D, tile_tex);
 
             //Render quad
             glBegin(GL_QUADS);
+                glTexCoord2f(0, 0);
                 glVertex2f(0.f, 0.f);
+                glTexCoord2f(0, 1);
                 glVertex2f(0.f, (float)PW_TILE_SIZE);
+                glTexCoord2f(1 / PW_TILE_QUAN, 1);
                 glVertex2f((float)PW_TILE_SIZE, (float)PW_TILE_SIZE);
+                glTexCoord2f(1 / PW_TILE_QUAN, 0);
                 glVertex2f((float)PW_TILE_SIZE, 0.f);
             glEnd();
         }
     }
+
+    //Render player
+    pwent_draw(player);
 
     //Switch buffers, update screen
     SDL_GL_SwapBuffers();
@@ -145,6 +172,12 @@ int pw_draw() {
 
 //Function for cleaning up before exit
 int pw_exit() {
+    //Free player structure
+    if(player != NULL) {
+        free(player);
+        player = NULL;
+    }
+
     //Free the map array
     if(map != NULL) {
         free(map);

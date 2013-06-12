@@ -26,8 +26,8 @@
 #define PW_SCREEN_W 640
 #define PW_SCREEN_H 480
 #define PW_TILE_SIZE 64
-#define PW_TILE_QUAN 0
-#define PW_TILE_WALK {0}
+#define PW_TILE_QUAN 3
+#define PW_TILE_WALK {0, 1, 1}
 
 //Auxiliary constants
 #define PW_SQRT_ERR 0.001f
@@ -90,6 +90,7 @@ struct pwent {
 //Declare functions and macros in pwent.c
 struct pwent pwent_make(float, float, GLuint, float, float, float);
 struct poly pwent_box(struct pwent);
+int pwent_draw(struct pwent*);
 //Obtain facing direction of an entity
 #define PWENT_FACE(pe1) vector_make(cos(pe1.angle * M_PI / 180), sin(pe1.angle * M_PI / 180));
 

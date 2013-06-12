@@ -46,16 +46,21 @@ struct poly pwent_box(struct pwent pe1) {
     return res;
 }
 
-int pwent_draw(struct pwent pe1) {
-    glLoadIdentity();
-    glTranslatef(pe1.pos.x, pe1.pos.y, 0.f);
-    glRotatef(pe1.angle, 0.f, 0.f, 1.f);
+int pwent_draw(struct pwent *pe1) {
+    if(pe1 == NULL) return 0;
 
+    //Translate and rotate matrix
+    glLoadIdentity();
+    glTranslatef(pe1->pos.x, pe1->pos.y, 0.f);
+    glRotatef(pe1->angle, 0.f, 0.f, 1.f);
+
+    //Render the rectangle
+    glColor4f(1.f, 1.f, 1.f, 1.f);
     glBegin(GL_QUADS);
-        glVertex2f(-pe1.size.x / 2, -pe1.size.y / 2);
-        glVertex2f(-pe1.size.x / 2, pe1.size.y / 2);
-        glVertex2f(pe1.size.x / 2, pe1.size.y / 2);
-        glVertex2f(pe1.size.x / 2, -pe1.size.y / 2);
+        glVertex2f(-pe1->size.x / 2, -pe1->size.y / 2);
+        glVertex2f(-pe1->size.x / 2, pe1->size.y / 2);
+        glVertex2f(pe1->size.x / 2, pe1->size.y / 2);
+        glVertex2f(pe1->size.x / 2, -pe1->size.y / 2);
     glEnd();
 
     return 0;
