@@ -1,3 +1,11 @@
+/*
+ * File: pwaux.c / Project: Pweke
+ * Author: Mwitishi
+ * This file contains auxiliary functions of the project Pweke.
+ * They mainly work with structures vector and poly,
+ * both defined in pweke.h
+ */
+
 #include "pweke.h"
 
 //Function for creating a vector out of coordinates

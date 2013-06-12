@@ -1,3 +1,10 @@
+/*
+ * File: pwent.c / Project: Pweke
+ * Author: Mwitishi
+ * This file contains source code related to entities in the project Pweke.
+ * Entities are contained in structure pwent, defined in pweke.h
+ */
+
 #include "pweke.h"
 
 //Create an entity given entity data

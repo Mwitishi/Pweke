@@ -1,3 +1,12 @@
+/*
+ * File: pweke.h / Project: Pweke
+ * Author: Mwitishi
+ * This is the main header file for project Pweke.
+ * It contains other header includes, macros containing data about the game,
+ * extern variable declarations, struct definitions, and declarations of functions.
+ * This header is included in all source code files in project Pweke.
+ */
+
 #ifndef PWEKE_H
 #define PWEKE_H
 
@@ -78,7 +87,7 @@ struct pwent {
     float angle;
 };
 
-//Declare functions in pwent.c
+//Declare functions and macros in pwent.c
 struct pwent pwent_make(float, float, GLuint, float, float, float);
 struct poly pwent_box(struct pwent);
 //Obtain facing direction of an entity
@@ -88,6 +97,8 @@ struct poly pwent_box(struct pwent);
 //Declare functions and macros in pwaux.c
 float pw_sqrt(float);
 struct vector vector_make(float, float);
+struct poly poly_make(int, struct vector*);
+char poly_collide(struct poly, struct poly);
 //Add two vectors
 #define VECTOR_A(v1, v2) vector_make(v1.x + v2.x, v1.y + v2.y)
 //Product of a vector and a constant
@@ -102,8 +113,6 @@ struct vector vector_make(float, float);
 #define VECTOR_ROTATE(v1, f1) VECTOR_A(VECTOR_C(v1, (float)cos((double)f1)), VECTOR_C(NVECTOR(v1), (float)sin((double)f1)));
 //Get normal vector to v1
 #define NVECTOR(v1) vector_make(-v1.y, v1.x)
-struct poly poly_make(int, struct vector*);
-char poly_collide(struct poly, struct poly);
 
 //Declare functions in pwfiles.c
 int pw_load_map(char*);

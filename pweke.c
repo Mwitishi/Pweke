@@ -1,3 +1,12 @@
+/*
+ * File: pweke.c / Project: Pweke
+ * Author: Mwitishi
+ * This is the main source code file in project Pweke.
+ * It contains the main function of the program,
+ * as well as functions which make up the main processing tree.
+ * Global variables are declared in this file.
+ */
+
 //Avoid double declaring global variables
 #define NO_EXTERN
 
@@ -61,6 +70,12 @@ int pw_start() {
     //Reset matrix
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
+
+    //Load textures
+    glGenTextures(1, &tile_tex);
+    glGenTextures(1, &player_tex);
+
+    //Load map
 
     return 0;
 }
@@ -158,8 +173,11 @@ int main(int argc, char **argv) {
         //Event processing
         if(pw_event()) goto end;
 
+        //Entity updates
+        if(pw_update()) goto end;
+
         //Render the scene
-        pw_draw();
+        if(pw_draw()) goto end;
     }
 
 end:

@@ -1,3 +1,12 @@
+/*
+ * File: pwfiles.c / Project: Pweke
+ * Author: Mwitishi
+ * This file contains functions related to files used by program Pweke.
+ * Files are accessed using functions in stdio.h, included in pweke.h
+ * Data files are contained in folder PW_DATA_FOLD,
+ * defined in pweke.h
+ */
+
 #include "pweke.h"
 
 //Function for loading a tilemap from a file
